@@ -50,6 +50,15 @@ print(ansdict)
 
 ```
 
+### defaultdict
+defaultdict用法示例：
+
+```python
+
+
+
+```
+
 
 ## itertools库
 
