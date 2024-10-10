@@ -13,6 +13,17 @@ print(round(3.35,1))
 ```
 n表示小数位数。
 
+### extend()方法
+```python
+lst=[1,2]
+lst.extend([3,4])
+lst.extend((5,6))
+lst.extend({7:'seven',8:'eight'})
+lst.extend({10,9})
+print(lst)
+#输出：[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+
 ### enumerate()函数
 ```python
 names = ['Alice', 'Bob', 'Carl']
@@ -27,7 +38,7 @@ print(list(enumerate(names,1)))
 ## collections库
 
 ### Counter
-Counter用法示例：
+
 ```python
 from collections import Counter
 
@@ -51,7 +62,6 @@ print(ansdict)
 ```
 
 ### defaultdict
-defaultdict用法示例：
 
 ```python
 
@@ -63,7 +73,6 @@ defaultdict用法示例：
 ## itertools库
 
 ### permutations
-permutations用法示例：
 
 ```python
 from itertools import  permutations
