@@ -10,6 +10,7 @@ print(round(3.35,1))
 输出：
 3
 3.4
+'''
 ```
 n表示小数位数。
 
@@ -33,6 +34,7 @@ print(list(enumerate(names,1)))
 输出：
 [(0, 'Alice'), (1, 'Bob'), (2, 'Carl')]
 [(1, 'Alice'), (2, 'Bob'), (3, 'Carl')]
+'''
 ```
 
 ## collections库
@@ -85,7 +87,8 @@ for i in permutations(a,3):
 c = ('e','f','g')  #对元组进行permutations排列组合
 for j in permutations(c,2):
     print (j)
-'''输出：
+'''
+输出：
 ('e', 'f')
 ('e', 'g')
 ('f', 'e')
@@ -95,4 +98,23 @@ for j in permutations(c,2):
 '''
 ```
 
+## bisect库
 
+### bisect(), bisect_left(), bisect_right()
+
+bisect()和bisect_right()等同。bisect_left()和bisect_right()分别返回大于等于和大于指定值的第一个索引。
+
+```python
+from bisect import *
+ls = [1,3,5,5,5,7,7,9]
+print(bisect_left(ls,5))
+print(bisect_right(ls,5))
+print(bisect(ls,5))
+'''
+输出：
+2
+5
+5
+'''
+
+```
