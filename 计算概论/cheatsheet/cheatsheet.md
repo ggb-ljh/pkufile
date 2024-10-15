@@ -4,7 +4,7 @@
 
 ### round()函数
 ```python
-print(round( 3.35 ))
+print(round(3.35))
 print(round(3.35,1))
 '''
 输出：
@@ -52,7 +52,8 @@ for k,v in c.items():
 1 3
 6 3
 7 1
-8 1'''
+8 1
+'''
 
 print(count)
 #输出：Counter({1: 3, 6: 3, 7: 1, 8: 1})
@@ -102,6 +103,7 @@ for j in permutations(c,2):
 
 ### bisect(), bisect_left(), bisect_right()
 
+输入的列表应有序！
 bisect()和bisect_right()等同。bisect_left()和bisect_right()分别返回大于等于和大于指定值的第一个索引。
 
 ```python
@@ -110,11 +112,14 @@ ls = [1,3,5,5,5,7,7,9]
 print(bisect_left(ls,5))
 print(bisect_right(ls,5))
 print(bisect(ls,5))
+print(bisect(ls,15))
+
 '''
 输出：
 2
 5
 5
+8
 '''
 
 ```
