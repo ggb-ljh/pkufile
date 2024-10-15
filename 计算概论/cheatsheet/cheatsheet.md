@@ -48,7 +48,8 @@ nums=[1,1,1,6,6,6,7,8]
 c=Counter(nums)
 for k,v in c.items():
     print(k,v)
-'''输出：
+'''
+输出：
 1 3
 6 3
 7 1
@@ -67,7 +68,31 @@ print(ansdict)
 ### defaultdict
 
 ```python
+s  = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
+d = defaultdict(list)
+for k, v in s:
+    d[k].append(v)
 
+print(d)
+print(sorted(d.items()))
+print(d['green'])
+'''
+输出：
+defaultdict(<class 'list'>, {'yellow': [1, 3], 'blue': [2, 4], 'red': [1]})
+[('blue', [2, 4]), ('red', [1]), ('yellow', [1, 3])]
+[]
+
+s = 'mississippi'
+d = defaultdict(int)
+for k in s:
+    d[k] += 1
+print(d)
+print(d['a'])
+'''
+输出：
+defaultdict(<class 'int'>, {'m': 1, 'i': 4, 's': 4, 'p': 2})
+0
+'''
 
 
 ```
@@ -104,6 +129,7 @@ for j in permutations(c,2):
 ### bisect(), bisect_left(), bisect_right()
 
 输入的列表应有序！
+
 bisect()和bisect_right()等同。bisect_left()和bisect_right()分别返回大于等于和大于指定值的第一个索引。
 
 ```python
