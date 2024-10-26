@@ -161,3 +161,33 @@ print(bisect(ls,15))
 '''
 
 ```
+
+## sys库
+
+利用stdin.read()可以一次读取多行数据。若有如下程序：
+
+```python
+import sys
+data=sys.stdin.read().strip()
+datas=data.split('\n')
+
+for x in datas:
+    print(1+int(x))
+
+```
+
+若输入：
+
+```python
+113
+513
+```
+
+在本地似乎不会有输出，但在做题网站上会输出：
+
+```python
+114
+514
+```
+
+
