@@ -6,7 +6,9 @@
 import sys
 from functools import lru_cache
 sys.setrecursionlimit(1 << 30)
+
 @lru_cache(maxsize=None)
+def #上面这一行必须和def紧挨着
 
 ```
 
