@@ -1,5 +1,15 @@
 # CHEATSHEET
 
+## 做递归防超时定式
+
+```python
+import sys
+from functools import lru_cache
+sys.setrecursionlimit(1 << 30)
+@lru_cache(maxsize=None)
+
+```
+
 ## 一些散装函数
 
 ### round()函数
