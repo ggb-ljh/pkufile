@@ -9,6 +9,7 @@ sys.setrecursionlimit(1 << 30)
 
 @lru_cache(maxsize=None)
 def #上面这一行必须和def紧挨着
+#lru_cache仅适用于不可变对象
 
 ```
 
