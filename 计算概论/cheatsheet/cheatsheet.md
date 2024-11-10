@@ -62,6 +62,18 @@ print(list(enumerate(names,1)))
 '''
 ```
 
+### eval()函数
+
+将字符串解析为表达式。
+
+```python
+from math import *
+print(eval('5*3+sqrt(2)'))
+#输出：16.414213562373096
+
+```
+
+
 ## collections库
 
 ### Counter
