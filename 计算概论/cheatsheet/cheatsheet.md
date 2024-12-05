@@ -93,7 +93,7 @@ for k,v in c.items():
 8 1
 '''
 
-print(count)
+print(c)
 #输出：Counter({1: 3, 6: 3, 7: 1, 8: 1})
 
 ansdict=c.most_common(2)
@@ -141,7 +141,7 @@ defaultdict(<class 'int'>, {'m': 1, 'i': 4, 's': 4, 'p': 2})
 ### permutations
 
 ```python
-from itertools import  permutations
+from itertools import permutations
 a = 'abc'   #对字符串进行permutations排列组合
 for i in permutations(a,3):
     x = ''.join(i)
