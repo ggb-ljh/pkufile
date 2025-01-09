@@ -8,7 +8,8 @@ from functools import lru_cache
 sys.setrecursionlimit(1 << 30)
 
 @lru_cache(maxsize=None)
-def #上面这一行必须和def紧挨着
+#def...
+#上面这一行必须和def紧挨着
 #lru_cache仅适用于不可变对象
 
 ```
@@ -25,9 +26,11 @@ print(round(3.35,1))
 3.4
 '''
 ```
+
 第二个参数表示小数位数。
 
 但是要注意，这样可能会舍去末尾的0，因此更建议如下操作：
+
 ```python
 print('%.2f'%9.801)
 print('%.3f'%15.50549)
@@ -67,7 +70,7 @@ print(list(enumerate(names,1)))
 将字符串解析为表达式。
 
 ```python
-from math import *
+from math import sqrt
 print(eval('5*3+sqrt(2)'))
 #输出：16.414213562373096
 
@@ -209,11 +212,100 @@ for x in datas:
 513
 ```
 
-在本地似乎不会有输出，但在做题网站上会输出：
+在本地不会直接输出，但在做题网站上会输出：
 
 ```python
 114
 514
 ```
 
+### 埃氏筛
 
+```python
+prime=[True for _ in range(n+1)]
+primes=[]
+p=2
+while p*p<=n:
+    if prime[p]:
+        primes.append(p)
+        for i in range(p*p,n+1,p):
+            prime[i]=False
+    p+=1
+```
+
+### 欧拉筛
+
+```python
+primes=[]
+is_prime=[True]*(n+1)
+for i in range(2,n+1):
+    if is_prime[i]:
+        primes.append(i)
+    for j in primes:
+        if i*j>n:
+            break
+        is_prime[i*j]=False
+        if i%j==0:
+            break
+```
+
+## math库
+
+```python
+import math
+print(math.gcd(90,54))
+print(math.floor(1.14))
+print(math.ceil(1.14))
+print(math.log(729,3))
+print(math.factorial(5))
+print(math.isclose(0.1+0.2,0.3))
+
+'''
+输出：
+18
+1
+2
+6.0
+120
+True
+'''
+```
+
+### Dilworth定理
+
+最少严格/不严格上升子序列的分割数=最长不严格/严格下降子序列长度。
+
+```python
+import bisect
+arr=[9,4,10,5,1]
+arr.reverse()
+a=[]
+for x in arr:
+    idx=bisect.bisect(a,x)
+    if idx==len(a):
+        a.append(x)
+    else:
+        a[idx]=x
+print(len(a))
+#输出：3
+```
+
+### 二分查找
+
+valid(i)==True的i值有上界。
+
+```python
+def valid(i):
+    return i<114514
+
+left,right=0,10**8
+#left是左边界，right是右边界+1
+while left<right:
+    mid=(left+right)//2
+    if valid(mid):
+        left=mid+1
+    else:
+        right=mid
+print(left-1)
+#输出：114513
+```
