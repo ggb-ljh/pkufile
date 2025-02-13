@@ -7,10 +7,10 @@ import sys
 from functools import lru_cache
 sys.setrecursionlimit(1 << 30)
 
-@lru_cache(maxsize=None)
-#def...
-#上面这一行必须和def紧挨着
-#lru_cache仅适用于不可变对象
+@lru_cache(maxsize = None)
+# def...
+# 上面这一行必须和def紧挨着
+# lru_cache仅适用于不可变对象
 
 ```
 
@@ -19,7 +19,7 @@ sys.setrecursionlimit(1 << 30)
 ### round()函数
 ```python
 print(round(3.35))
-print(round(3.35,1))
+print(round(3.35, 1))
 '''
 输出：
 3
@@ -32,8 +32,8 @@ print(round(3.35,1))
 但是要注意，这样可能会舍去末尾的0，因此更建议如下操作：
 
 ```python
-print('%.2f'%9.801)
-print('%.3f'%15.50549)
+print('%.2f' % 9.801)
+print('%.3f' % 15.50549)
 '''
 输出：
 9.80
@@ -44,11 +44,11 @@ print('%.3f'%15.50549)
 
 ### extend()方法
 ```python
-lst=[1,2]
-lst.extend([3,4])
-lst.extend((5,6))
-lst.extend({7:'seven',8:'eight'})
-lst.extend({10,9})
+lst = [1, 2]
+lst.extend([3, 4])
+lst.extend((5, 6))
+lst.extend({7: 'seven', 8: 'eight'})
+lst.extend({10, 9})
 print(lst)
 #输出：[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
@@ -57,7 +57,7 @@ print(lst)
 ```python
 names = ['Alice', 'Bob', 'Carl']
 print(list(enumerate(names)))
-print(list(enumerate(names,1)))
+print(list(enumerate(names, 1)))
 '''
 输出：
 [(0, 'Alice'), (1, 'Bob'), (2, 'Carl')]
@@ -84,10 +84,10 @@ print(eval('5*3+sqrt(2)'))
 ```python
 from collections import Counter
 
-nums=[1,1,1,6,6,6,7,8]
-c=Counter(nums)
-for k,v in c.items():
-    print(k,v)
+nums = [1, 1, 1, 6, 6, 6, 7, 8]
+c = Counter(nums)
+for k, v in c.items():
+    print(k, v)
 '''
 输出：
 1 3
@@ -99,7 +99,7 @@ for k,v in c.items():
 print(c)
 #输出：Counter({1: 3, 6: 3, 7: 1, 8: 1})
 
-ansdict=c.most_common(2)
+ansdict = c.most_common(2)
 print(ansdict)
 #输出：[(1, 3), (6, 3)]
 
@@ -108,7 +108,7 @@ print(ansdict)
 ### defaultdict
 
 ```python
-s  = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
+s = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
 d = defaultdict(list)
 for k, v in s:
     d[k].append(v)
@@ -146,14 +146,14 @@ defaultdict(<class 'int'>, {'m': 1, 'i': 4, 's': 4, 'p': 2})
 ```python
 from itertools import permutations
 a = 'abc'   #对字符串进行permutations排列组合
-for i in permutations(a,3):
+for i in permutations(a, 3):
     x = ''.join(i)
-    print (x,end=' ')
+    print(x, end = ' ')
 #输出：abc acb bac bca cab cba
 
-c = ('e','f','g')  #对元组进行permutations排列组合
-for j in permutations(c,2):
-    print (j)
+c = ('e', 'f', 'g')  #对元组进行permutations排列组合
+for j in permutations(c, 2):
+    print(j)
 '''
 输出：
 ('e', 'f')
@@ -175,11 +175,11 @@ bisect()和bisect_right()等同。bisect_left()和bisect_right()分别返回大�
 
 ```python
 from bisect import *
-ls = [1,3,5,5,5,7,7,9]
-print(bisect_left(ls,5))
-print(bisect_right(ls,5))
-print(bisect(ls,5))
-print(bisect(ls,15))
+ls = [1, 3, 5, 5, 5, 7, 7, 9]
+print(bisect_left(ls, 5))
+print(bisect_right(ls, 5))
+print(bisect(ls, 5))
+print(bisect(ls, 15))
 
 '''
 输出：
@@ -197,11 +197,11 @@ print(bisect(ls,15))
 
 ```python
 import sys
-data=sys.stdin.read().strip()
-datas=data.split('\n')
+data = sys.stdin.read().strip()
+datas = data.split('\n')
 
 for x in datas:
-    print(1+int(x))
+    print(1 + int(x))
 
 ```
 
@@ -222,30 +222,30 @@ for x in datas:
 ### 埃氏筛
 
 ```python
-prime=[True for _ in range(n+1)]
-primes=[]
-p=2
-while p*p<=n:
+prime = [True for _ in range(n+1)]
+primes = []
+p = 2
+while p * p <= n:
     if prime[p]:
         primes.append(p)
-        for i in range(p*p,n+1,p):
-            prime[i]=False
-    p+=1
+        for i in range(p * p, n + 1, p):
+            prime[i] = False
+    p += 1
 ```
 
 ### 欧拉筛
 
 ```python
-primes=[]
-is_prime=[True]*(n+1)
-for i in range(2,n+1):
+primes = []
+is_prime = [True] * (n+1)
+for i in range(2, n + 1):
     if is_prime[i]:
         primes.append(i)
     for j in primes:
-        if i*j>n:
+        if i * j > n:
             break
-        is_prime[i*j]=False
-        if i%j==0:
+        is_prime[i * j] = False
+        if i % j == 0:
             break
 ```
 
@@ -253,12 +253,12 @@ for i in range(2,n+1):
 
 ```python
 import math
-print(math.gcd(90,54))
+print(math.gcd(90, 54))
 print(math.floor(1.14))
 print(math.ceil(1.14))
-print(math.log(729,3))
+print(math.log(729, 3))
 print(math.factorial(5))
-print(math.isclose(0.1+0.2,0.3))
+print(math.isclose(0.1 + 0.2, 0.3))
 
 '''
 输出：
@@ -277,35 +277,35 @@ True
 
 ```python
 import bisect
-arr=[9,4,10,5,1]
+arr = [9, 4, 10, 5, 1]
 arr.reverse()
-a=[]
+a = []
 for x in arr:
-    idx=bisect.bisect(a,x)
-    if idx==len(a):
+    idx = bisect.bisect(a, x)
+    if idx == len(a):
         a.append(x)
     else:
-        a[idx]=x
+        a[idx] = x
 print(len(a))
 #输出：3
 ```
 
 ### 二分查找
 
-valid(i)==True的i值有上界。
+valid(i) == True的i值有上界。
 
 ```python
 def valid(i):
-    return i<114514
+    return i < 114514
 
-left,right=0,10**8
-#left是左边界，right是右边界+1
-while left<right:
-    mid=(left+right)//2
+left, right = 0, 10**8
+#left是左边界，right是右边界 + 1
+while left < right:
+    mid = (left + right) // 2
     if valid(mid):
-        left=mid+1
+        left = mid + 1
     else:
-        right=mid
-print(left-1)
+        right = mid
+print(left - 1)
 #输出：114513
 ```
