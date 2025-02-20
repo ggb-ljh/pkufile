@@ -50,7 +50,7 @@ lst.extend((5, 6))
 lst.extend({7: 'seven', 8: 'eight'})
 lst.extend({10, 9})
 print(lst)
-#输出：[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# 输出：[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
 
 ### enumerate()函数
@@ -71,8 +71,8 @@ print(list(enumerate(names, 1)))
 
 ```python
 from math import sqrt
-print(eval('5*3+sqrt(2)'))
-#输出：16.414213562373096
+print(eval('5 * 3 + sqrt(2)'))
+# 输出：16.414213562373096
 
 ```
 
@@ -97,11 +97,11 @@ for k, v in c.items():
 '''
 
 print(c)
-#输出：Counter({1: 3, 6: 3, 7: 1, 8: 1})
+# 输出：Counter({1: 3, 6: 3, 7: 1, 8: 1})
 
 ansdict = c.most_common(2)
 print(ansdict)
-#输出：[(1, 3), (6, 3)]
+# 输出：[(1, 3), (6, 3)]
 
 ```
 
@@ -201,7 +201,7 @@ data = sys.stdin.read().strip()
 datas = data.split('\n')
 
 for x in datas:
-    print(1 + int(x))
+    print(int(x) + 1)
 
 ```
 
@@ -222,7 +222,7 @@ for x in datas:
 ### 埃氏筛
 
 ```python
-prime = [True for _ in range(n+1)]
+prime = [True for _ in range(n + 1)]
 primes = []
 p = 2
 while p * p <= n:
@@ -237,7 +237,7 @@ while p * p <= n:
 
 ```python
 primes = []
-is_prime = [True] * (n+1)
+is_prime = [True] * (n + 1)
 for i in range(2, n + 1):
     if is_prime[i]:
         primes.append(i)
@@ -287,7 +287,7 @@ for x in arr:
     else:
         a[idx] = x
 print(len(a))
-#输出：3
+# 输出：3
 ```
 
 ### 二分查找
@@ -299,7 +299,7 @@ def valid(i):
     return i < 114514
 
 left, right = 0, 10**8
-#left是左边界，right是右边界 + 1
+# left是左边界，right是右边界 + 1
 while left < right:
     mid = (left + right) // 2
     if valid(mid):
