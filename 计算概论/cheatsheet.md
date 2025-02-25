@@ -145,13 +145,13 @@ defaultdict(<class 'int'>, {'m': 1, 'i': 4, 's': 4, 'p': 2})
 
 ```python
 from itertools import permutations
-a = 'abc'   #对字符串进行permutations排列组合
+a = 'abc'   # 对字符串进行permutations排列组合
 for i in permutations(a, 3):
     x = ''.join(i)
     print(x, end = ' ')
-#输出：abc acb bac bca cab cba
+# 输出：abc acb bac bca cab cba
 
-c = ('e', 'f', 'g')  #对元组进行permutations排列组合
+c = ('e', 'f', 'g')  # 对元组进行permutations排列组合
 for j in permutations(c, 2):
     print(j)
 '''
