@@ -7,7 +7,7 @@
 ```python
 # small, large指可能取到的边界值
 # valid(x)大于等于某一值时为True，反之为False
-def binary_search_with_infimum(small, large):
+def binary_search_greatest_lower_bound(small, large):
     left, right = small, large
     while left < right:
         mid = (left + right) // 2
@@ -18,7 +18,7 @@ def binary_search_with_infimum(small, large):
     return left
 
 # valid(x)小于等于某一值时为True，反之为False
-def binary_search_with_supremum(small, large):
+def binary_search_least_upper_bound(small, large):
     left, right = small, large + 1
     while left < right:
         mid = (left + right) // 2
