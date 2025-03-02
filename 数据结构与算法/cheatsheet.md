@@ -37,11 +37,70 @@ def binary_search_least_upper_bound(small, large):
 
 ### 图
 
-## 语法
+## 语法&小技巧
 
 ### 保留小数位数
 
 ```python
 print('%.5f' % 2 ** 0.5)
 # 1.41421
+```
+
+### 字符串解析为表达式
+
+```python
+from math import sqrt
+print(eval('5 * 3 + sqrt(2)'))
+# 16.414213562373096
+```
+
+### 全排列
+
+```python
+from itertools import permutations
+a = 'abc'
+for i in permutations(a):
+    x = ''.join(i)
+    print(x, end = ' ')
+# abc acb bac bca cab cba
+
+c = ('e', 'f', 'g')
+for j in permutations(c, 2):
+    print(j)
+'''
+('e', 'f')
+('e', 'g')
+('f', 'e')
+('f', 'g')
+('g', 'e')
+('g', 'f')
+'''
+```
+
+### 素数筛法
+
+```python
+# 埃氏筛
+prime = [True] * (n + 1)
+primes = []
+p = 2
+while p * p <= n:
+    if prime[p]:
+        primes.append(p)
+        for i in range(p * p, n + 1, p):
+            prime[i] = False
+    p += 1
+
+# 欧拉筛
+primes = []
+prime = [True] * (n + 1)
+for i in range(2, n + 1):
+    if prime[i]:
+        primes.append(i)
+    for j in primes:
+        if i * j > n:
+            break
+        prime[i * j] = False
+        if i % j == 0:
+            break
 ```
