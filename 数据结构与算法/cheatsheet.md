@@ -33,6 +33,65 @@ def binary_search_least_upper_bound(small, large):
 
 ### 链表
 
+```python
+class ListNode:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+```
+
+#### 反转链表
+
+反转链表并返回新的头节点。
+
+```python
+def reverse_linked_list(head):
+    pre, cur = None, head
+    while cur is not None:
+        cur.next, pre, cur = pre, cur, cur.next
+    return pre
+```
+
+#### 合并两个升序链表
+
+合并两个升序链表并返回新的头节点。
+
+```python
+def merge_two_lists(head1, head2):
+    dummy = ListNode(0)
+    cur = dummy
+
+    while head1 is not None and head2 is not None:
+        if head1.val <= head2.val:
+            cur.next, head1 = head1, head1.next
+        else:
+            cur.next, head2 = head2, head2.next
+        cur = cur.next
+
+    cur.next = head2 if head1 is None else head1
+    
+    return dummy.next
+```
+
+#### 查找链表中间节点
+
+返回链表的中间节点或中间偏左节点。
+
+```python
+def find_middle_node(head):
+    slow = fast = head
+    
+    while fast.next and fast.next.next:
+        slow = slow.next
+        fast = fast.next.next
+
+    return slow
+```
+
+
+
+
+
 ### 二叉树
 
 ### 图
