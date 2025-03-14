@@ -5,6 +5,7 @@
 ### 二分查找
 
 small, large为可能取到的边界值。
+
 valid(x)大于等于某一值时为True，反之为False的情况：
 
 ```python
@@ -21,7 +22,7 @@ def binary_search_greatest_lower_bound(small, large):
 
 valid(x)小于等于某一值时为True，反之为False的情况：
 
-```
+```python
 def binary_search_least_upper_bound(small, large):
     left, right = small, large + 1
     while left < right:
@@ -71,7 +72,6 @@ def merge_two_lists(head1, head2):
         else:
             cur.next, head2 = head2, head2.next
         cur = cur.next
-
     cur.next = head2 if head1 is None else head1
     
     return dummy.next
@@ -84,11 +84,9 @@ def merge_two_lists(head1, head2):
 ```python
 def find_middle_node(head):
     slow = fast = head
-    
     while fast.next and fast.next.next:
         slow = slow.next
         fast = fast.next.next
-
     return slow
 ```
 
@@ -130,20 +128,19 @@ for i in permutations(a):
 c = ('e', 'f', 'g')
 for j in permutations(c, 2):
     print(j)
-'''
-('e', 'f')
-('e', 'g')
-('f', 'e')
-('f', 'g')
-('g', 'e')
-('g', 'f')
-'''
+# ('e', 'f')
+# ('e', 'g')
+# ('f', 'e')
+# ('f', 'g')
+# ('g', 'e')
+# ('g', 'f')
 ```
 
 ### 素数筛法
 
+#### 埃氏筛
+
 ```python
-# 埃氏筛
 prime = [True] * (n + 1)
 primes = []
 p = 2
@@ -153,8 +150,11 @@ while p * p <= n:
         for i in range(p * p, n + 1, p):
             prime[i] = False
     p += 1
+```
 
-# 欧拉筛
+#### 欧拉筛
+
+```python
 primes = []
 prime = [True] * (n + 1)
 for i in range(2, n + 1):
