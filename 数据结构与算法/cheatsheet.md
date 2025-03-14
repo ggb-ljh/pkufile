@@ -4,9 +4,10 @@
 
 ### 二分查找
 
+small, large为可能取到的边界值。
+valid(x)大于等于某一值时为True，反之为False的情况：
+
 ```python
-# small, large指可能取到的边界值
-# valid(x)大于等于某一值时为True，反之为False
 def binary_search_greatest_lower_bound(small, large):
     left, right = small, large
     while left < right:
@@ -16,8 +17,11 @@ def binary_search_greatest_lower_bound(small, large):
         else:
             left = mid + 1
     return left
+```
 
-# valid(x)小于等于某一值时为True，反之为False
+valid(x)小于等于某一值时为True，反之为False的情况：
+
+```
 def binary_search_least_upper_bound(small, large):
     left, right = small, large + 1
     while left < right:
