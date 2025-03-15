@@ -4,9 +4,9 @@
 
 ### 二分查找
 
-small, large为可能取到的边界值。
+`small`, `large`为可能取到的边界值。
 
-valid(x)大于等于某一值时为True，反之为False的情况：
+`valid(x)`大于等于某一值时为`True`，反之为`False`的情况：
 
 ```python
 def binary_search_greatest_lower_bound(small, large):
@@ -20,7 +20,7 @@ def binary_search_greatest_lower_bound(small, large):
     return left
 ```
 
-valid(x)小于等于某一值时为True，反之为False的情况：
+`valid(x)`小于等于某一值时为`True`，反之为`False`的情况：
 
 ```python
 def binary_search_least_upper_bound(small, large):
@@ -35,6 +35,56 @@ def binary_search_least_upper_bound(small, large):
 ```
 
 ## 数据结构
+
+### 栈
+
+#### 中缀表达式转后缀表达式
+
+调度场算法：
+
+初始化运算符栈`operator`和输出栈`result`为空。对于表达式`tokens`的每个`token`：
+
+如果`token`为数字：将其压入输出栈。
+
+如果`token`为左括号：将其压入运算符栈。
+
+如果`token`为右括号：将运算符栈顶元素弹出并压入输出栈，直到遇到左括号为止。
+
+如果`token`为运算符：将运算符栈顶元素弹出并压入输出栈，直到运算符栈顶元素优先级小于`token`或遇到左括号为止。将`token`压入运算符栈。
+
+将运算符栈顶元素弹出并压入输出栈，直到运算符栈为空为止。
+
+```python
+priority = {'(': 0,
+            '+': 1,
+            '-': 1,
+            '*': 2,
+            '/': 2,
+            }
+
+# (3)*((3+4)*(2+3.5)/(4+5))
+tokens = ['(', '3', ')', '*', '(', '(', '3', '+', '4', ')', '*', '(', '2', '+', '3.5', ')', '/', '(', '4', '+', '5', ')', ')']
+operator = []
+result = []
+for token in tokens:
+    if token in '+-*/':
+        while operator and priority[operator[-1]] >= priority[token]:
+            result.append(operator.pop())
+        operator.append(token)
+    elif token == '(':
+        operator.append(token)
+    elif token == ')':
+        while operator[-1] != '(':
+            result.append(operator.pop())
+        operator.pop()
+    else:
+        result.append(token)
+while operator:
+    result.append(operator.pop())
+
+print(*result)
+# 3 3 4 + 2 3.5 + * 4 5 + / *
+```
 
 ### 链表
 
