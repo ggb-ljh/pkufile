@@ -172,7 +172,7 @@ from itertools import permutations
 a = 'abc'
 for i in permutations(a):
     x = ''.join(i)
-    print(x, end = ' ')
+    print(x, end=' ')
 # abc acb bac bca cab cba
 
 c = ('e', 'f', 'g')
