@@ -34,6 +34,45 @@ def binary_search_least_upper_bound(small, large):
     return right - 1
 ```
 
+### 求排列的逆序数
+
+```python
+def merge_two(left, right):
+    res = []
+    cnt = 0
+    p1 = p2 = 0
+    l1, l2 = len(left), len(right)
+    while p1 < l1 and p2 < l2:
+        if left[p1] <= right[p2]:
+            res.append(left[p1])
+            p1 += 1
+        else:
+            res.append(right[p2])
+            p2 += 1
+            cnt += l1 - p1
+    res.extend(left[p1:])
+    res.extend(right[p2:])
+
+    return res, cnt
+
+def merge_self(nums):
+    l = len(nums)
+    if l == 1:
+        return nums, 0
+    mid = l >> 1
+    merged_left, cnt_left = merge_self(nums[:mid])
+    merged_right, cnt_right = merge_self(nums[mid:])
+    merged_two, cnt = merge_two(merged_left, merged_right)
+
+    return merged_two, cnt + cnt_right + cnt_left
+
+seq = [2, 6, 3, 4, 5, 1]
+_, ans = merge_self(seq)
+
+print(ans)
+# 8
+```
+
 ## 数据结构
 
 ### 栈
