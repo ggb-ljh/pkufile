@@ -179,6 +179,33 @@ def find_middle_node(head):
     return slow
 ```
 
+### 并查集
+
+注意可能根据题目需求不同，`union()`的实现方式需要调整。
+
+```python
+class DisjointSet:
+    def __init__(self, k):
+        self.parents = list(range(k))
+        self.rank = [1] * k
+
+    def find(self, x):
+        if self.parents[x] != x:
+            self.parents[x] = self.find(self.parents[x])
+        return self.parents[x]
+
+    def union(self, x, y):
+        x_rep, y_rep = self.find(x), self.find(y)
+        if x_rep == y_rep:
+            return
+        if self.rank[x_rep] < self.rank[y_rep]:
+            self.parents[x_rep] = y_rep
+        elif self.rank[x_rep] > self.rank[y_rep]:
+            self.parents[y_rep] = x_rep
+        else:
+            self.parents[y_rep] = x_rep
+            self.rank[x_rep] += 1
+```
 
 
 
@@ -188,6 +215,16 @@ def find_middle_node(head):
 ### 图
 
 ## 语法&小技巧
+
+### ASCII
+
+```python
+print(ord('A'))
+# 65
+
+print(chr(65))
+# A
+```
 
 ### 保留小数位数
 
