@@ -125,6 +125,30 @@ print(*result)
 # 3 3 4 + 2 3.5 + * 4 5 + / *
 ```
 
+#### 单调栈
+
+找到某个数组中，每个元素右边第一个比其更大的数的索引。这时使用单调递减栈。
+
+```python
+def find_next_greater(nums):
+    n = len(nums)
+    res = [0] * n
+    stack = []
+
+    for i in range(n):
+        while stack and nums[i] > nums[stack[-1]]:
+            res[stack.pop()] = i
+        stack.append(i)
+
+    while stack:
+        res[stack.pop()] = n
+
+    return res
+
+print(find_next_greater([4, 5, 2, 25]))
+# [1, 3, 3, 4]
+```
+
 ### 链表
 
 ```python
