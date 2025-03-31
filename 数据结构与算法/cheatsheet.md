@@ -201,7 +201,80 @@ def find_middle_node(head):
     return slow
 ```
 
-### 并查集
+### 树
+
+二叉树的定义
+
+```python
+class TreeNode:
+    def __init__(self, val, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+```
+
+多叉树的定义
+
+```python
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.children = []
+```
+
+#### 二叉搜索树的建立
+
+```python
+def insert(value, node):
+    if value == node.val:
+        return
+    if value < node.val:
+        if node.left is None:
+            node.left = TreeNode(value)
+        else:
+            insert(value, node.left)
+    else:
+        if node.right is None:
+            node.right = TreeNode(value)
+        else:
+            insert(value, node.right)
+```
+
+#### 二叉搜索树的验证
+
+第一种方式是验证中序遍历序列是否是严格递增序列。
+
+```python
+def isBST(root):
+    stack, cur = [], float('-inf')
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+        root = stack.pop()
+        if root.val <= cur:
+            return False
+        cur = root.val
+        root = root.right
+
+    return True
+```
+
+第二种方式是验证节点值是否在合法范围内。
+
+```python
+def helper(node, lower=float('-inf'), upper=float('inf')):
+    if node is None:
+        return True
+    value = node.val
+    if value <= lower or value >= upper:
+        return False
+    return helper(node.left, lower, value) and helper(node.right, value, upper)
+```
+
+
+
+#### 并查集
 
 注意可能根据题目需求不同，`union()`的实现方式需要调整。
 
@@ -230,9 +303,6 @@ class DisjointSet:
 ```
 
 
-
-
-### 二叉树
 
 ### 图
 
