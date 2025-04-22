@@ -274,7 +274,54 @@ def helper(node, lower=float('-inf'), upper=float('inf')):
     return helper(node.left, lower, value) and helper(node.right, value, upper)
 ```
 
+#### Huffman编码
 
+目的：用二叉树的叶节点存储字符，并最小化叶节点与叶节点权值之积的总和。
+
+思路：弹出堆中最小的两个节点，合并并入堆。循环往复，直至堆中只剩下根节点。
+
+```python
+from heapq import heappop, heappush, heapify
+
+class TreeNode:
+    def __init__(self, val, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+    def __lt__(self, other):
+        return self.val < other.val
+
+
+n = 4
+heap = [TreeNode(i) for i in [1, 1, 3, 5]
+heapify(heap)
+
+for _ in range(n - 1):
+    left_node, right_node = heappop(heap), heappop(heap)
+    merged = TreeNode(left_node.val + right_node.val)
+    merged.left, merged.right = left_node, right_node
+    heappush(heap, merged)
+
+stack = [(heap[0], 0)]
+ans = 0
+while stack:
+    node, depth = stack.pop()
+    if node.left is None and node.right is None:
+        ans += node.val * depth
+        continue
+    if node.right is not None:
+        stack.append((node.right, depth + 1))
+    if node.left is not None:
+        stack.append((node.left, depth + 1))
+
+print(ans)
+# 17
+```
+
+#### 多叉树的表示——长子-兄弟表示法
+
+一个节点的左指针为其第一个子节点，右指针为其下一个兄弟节点。因此，前序遍历序列不变。
 
 #### 并查集
 
@@ -304,8 +351,6 @@ class DisjointSet:
             self.rank[x_rep] += 1
 ```
 
-
-
 ### 图
 
 ## 语法&小技巧
@@ -313,11 +358,8 @@ class DisjointSet:
 ### ASCII
 
 ```python
-print(ord('A'))
-# 65
-
-print(chr(65))
-# A
+print(ord('A'), ord('a'), chr(65))
+# 65 97 A
 ```
 
 ### 保留小数位数
