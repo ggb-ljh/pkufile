@@ -34,6 +34,19 @@ def binary_search_least_upper_bound(small, large):
     return right - 1
 ```
 
+### 滑动窗口
+
+```python
+n = len(nums)
+right = 0
+for left in range(n):
+    # 做与left有关的操作
+    while right < n and (与right有关的某一条件):
+        # 做与right有关的操作
+        right += 1
+    # 做一些操作，如增加计数等，比如n - right + 1
+```
+
 ### 求排列的逆序数
 
 ```python
@@ -71,6 +84,38 @@ _, ans = merge_self(seq)
 
 print(ans)
 # 8
+```
+
+### 素数筛法
+
+#### 埃氏筛
+
+```python
+prime = [True] * (n + 1)
+primes = []
+p = 2
+while p * p <= n:
+    if prime[p]:
+        primes.append(p)
+        for i in range(p * p, n + 1, p):
+            prime[i] = False
+    p += 1
+```
+
+#### 欧拉筛
+
+```python
+primes = []
+prime = [True] * (n + 1)
+for i in range(2, n + 1):
+    if prime[i]:
+        primes.append(i)
+    for j in primes:
+        if i * j > n:
+            break
+        prime[i * j] = False
+        if i % j == 0:
+            break
 ```
 
 ## 数据结构
@@ -438,34 +483,4 @@ print('yes' if re.match(reg, s) else 'no')
 # yes
 ```
 
-### 素数筛法
 
-#### 埃氏筛
-
-```python
-prime = [True] * (n + 1)
-primes = []
-p = 2
-while p * p <= n:
-    if prime[p]:
-        primes.append(p)
-        for i in range(p * p, n + 1, p):
-            prime[i] = False
-    p += 1
-```
-
-#### 欧拉筛
-
-```python
-primes = []
-prime = [True] * (n + 1)
-for i in range(2, n + 1):
-    if prime[i]:
-        primes.append(i)
-    for j in primes:
-        if i * j > n:
-            break
-        prime[i * j] = False
-        if i % j == 0:
-            break
-```
