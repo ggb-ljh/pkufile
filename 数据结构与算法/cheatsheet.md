@@ -118,6 +118,46 @@ for i in range(2, n + 1):
             break
 ```
 
+### KMP算法
+
+用于寻找字符串text中出现字符串模式pattern的位置。
+
+```python
+def compute_lps(pattern):
+    m = len(pattern)
+    lps = [0] * m
+    length = 0
+    for i in range(1, m):
+        while length > 0 and pattern[i] != pattern[length]:
+            length = lps[length - 1]
+        if pattern[i] == pattern[length]:
+            length += 1
+        lps[i] = length
+    return lps
+
+def kmp_search(text, pattern):
+    n = len(text)
+    m = len(pattern)
+    if m == 0:
+        return []
+    lps = compute_lps(pattern)
+    matches = []
+
+    j = 0
+    for i in range(n):
+        while j > 0 and text[i] != pattern[j]:
+            j = lps[j - 1]
+        if text[i] == pattern[j]:
+            j += 1
+        if j == m:
+            matches.append(i - j + 1)
+            j = lps[j - 1]
+    return matches
+
+print(kmp_search('ABABABABCABABABABCABABABABC', 'ABABCABAB'))
+# [4, 13]
+```
+
 ## 数据结构
 
 ### 栈
