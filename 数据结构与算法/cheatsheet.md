@@ -120,7 +120,7 @@ for i in range(2, n + 1):
 
 ### KMP算法
 
-用于寻找字符串text中出现字符串模式pattern的位置。
+用于寻找字符串`text`中出现字符串模式`pattern`的位置。
 
 ```python
 def compute_lps(pattern):
@@ -437,6 +437,50 @@ class DisjointSet:
 ```
 
 ### 图
+
+#### 拓扑排序——Kahn算法
+
+对无环有向图进行拓扑排序，对于任意边`(u, v)`，排序结果`result`中`u`都在`v`前面。若无法把所有顶点加入`result`中，则有环。
+
+```python
+from collections import deque, defaultdict
+
+def topological_sort(graph):
+    degree = defaultdict(int)
+    result = []
+
+    for u in graph:
+        for v in graph[u]:
+            degree[v] += 1
+
+    q = deque(u for u in graph if degree[u] == 0)
+    while q:
+        u = q.popleft()
+        result.append(u)
+        for v in graph[u]:
+            degree[v] -= 1
+            if degree[v] == 0:
+                q.append(v)
+
+    return result if len(result) == len(graph) else None
+
+def main():
+    graph = {
+        'A': ['B', 'C'],
+        'B': ['C', 'D'],
+        'C': ['E'],
+        'D': ['F'],
+        'E': ['F'],
+        'F': []
+    }
+    print(topological_sort(graph))
+
+main()
+# ['A', 'B', 'C', 'D', 'E', 'F']
+```
+
+#### 最小生成树——Prim算法&Kruskal算法
+
 
 ## 语法&小技巧
 
