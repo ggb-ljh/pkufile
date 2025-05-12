@@ -481,6 +481,24 @@ main()
 
 #### 最小生成树——Prim算法&Kruskal算法
 
+找到一棵连接所有`n`个节点的包含`n - 1`条边的树，它在所有这样的树中权值之和最小。
+
+Prim算法：选定某一起始节点，不断选择已生成的树通往外部的边中权值最小的一条，将其加入树中。
+
+
+Kruskal算法：对所有边`edges`按权值进行排序，遍历每一条边，利用并查集，如果一条边的两个节点尚未在同一个连通分量中，则将该边加入结果`result`中。
+
+```python
+# class DisjointSet:
+#     ...
+
+djs = DisjointSet(n)
+result = []
+for w, u, v in sorted(edges):
+    if djs.find(u) != djs.find(v):
+        djs.union(u, v)
+        result.append((w, u, v))
+```
 
 ## 语法&小技巧
 
