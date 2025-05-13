@@ -232,7 +232,7 @@ print(find_next_greater([4, 5, 2, 25]))
 # [1, 3, 3, 4]
 ```
 
-另外，对于单调递增栈，每当处理完一个索引，单调栈内的某一个索引所对应的元素，就是该索引到栈中下一个索引在数组中对应所有元素的最小值。对单调递减栈同理。
+另外，对于单调递增栈，每当处理完一个索引，单调栈内的某一个索引所对应的元素，就是该索引到栈中下一个索引在数组中对应所有元素的最小值。对单调递减栈类似。
 
 ### 链表
 
@@ -483,10 +483,30 @@ main()
 
 找到一棵连接所有`n`个节点的包含`n - 1`条边的树，它在所有这样的树中权值之和最小。
 
-Prim算法：选定某一起始节点，不断选择已生成的树通往外部的边中权值最小的一条，将其加入树中。
+Prim算法：对由`0`~`n - 1`标记节点的图`graph`，选定某一起始节点，不断选择已生成的树通往外部的边中权值最小的一条，将其加入`result`中。
 
+```python
+from heapq import heapify, heappush, heappop
 
-Kruskal算法：对所有边`edges`按权值进行排序，遍历每一条边，利用并查集，如果一条边的两个节点尚未在同一个连通分量中，则将该边加入结果`result`中。
+# 起始节点选为0
+heap = [(graph[0][child], 0, child) for child in graph[0]]
+heapify(heap)
+visited = [False] * n
+visited[0] = True
+result = []
+
+while len(result) < n - 1:
+    weight, parent, child = heappop(heap)
+    if not visited[child]:
+        visited[child] = True
+        result.append((weight, parent, child))
+        for to in range(n):
+            if not visited[to]:
+                heappush(heap, (matrix[child][to], child, to))
+print(result)
+```
+
+Kruskal算法：对所有边`edges`按权值进行排序，遍历每一条边，利用并查集，如果一条边的两个节点尚未在同一个连通分量中，则将该边加入`result`中。
 
 ```python
 # class DisjointSet:
