@@ -379,7 +379,7 @@ class TreeNode:
 
 
 n = 4
-heap = [TreeNode(i) for i in [1, 1, 3, 5]
+heap = [TreeNode(i) for i in [1, 1, 3, 5]]
 heapify(heap)
 
 for _ in range(n - 1):
@@ -483,7 +483,7 @@ main()
 
 找到一棵连接所有`n`个节点的包含`n - 1`条边的树，它在所有这样的树中权值之和最小。
 
-Prim算法：对由`0`~`n - 1`标记节点的图`graph`，选定某一起始节点，不断选择已生成的树通往外部的边中权值最小的一条，将其加入`result`中。
+Prim算法：对由`0`~`n - 1`标记节点的图`graph`，选定某一起始节点，不断选择已生成的树通往外部的边中权值最小的一条，将其加入`result`中。适用于稠密图。
 
 ```python
 from heapq import heapify, heappush, heappop
@@ -506,7 +506,7 @@ while len(result) < n - 1:
 print(result)
 ```
 
-Kruskal算法：对所有边`edges`按权值进行排序，遍历每一条边，利用并查集，如果一条边的两个节点尚未在同一个连通分量中，则将该边加入`result`中。
+Kruskal算法：对所有边`edges`按权值进行排序，遍历每一条边，利用并查集，如果一条边的两个节点尚未在同一个连通分量中，则将该边加入`result`中。适用于稀疏图。
 
 ```python
 # class DisjointSet:
