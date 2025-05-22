@@ -438,9 +438,51 @@ class DisjointSet:
 
 ### 图
 
-#### 拓扑排序——Kahn算法
+#### 最短路径Bellman-Ford算法
+
+Dijkstra算法：从堆中`heappop`出来的步长会越来越大。
+
+Bellman-Ford算法：经过`v-1`次松弛后，若还能松弛则存在负权回路。时间复杂度`O(VE)`。
+
+```python
+def bellman_ford(graph, V, source):
+    dist = [float('inf')] * V
+    dist[source] = 0
+
+    for _ in range(V - 1):
+        for u, v, w in graph:
+            if dist[u] != float('inf') and dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+
+    for u, v, w in graph:
+        if dist[u] != float('inf') and dist[u] + w < dist[v]:
+            # 存在负权回路
+            return None
+
+    return dist
+```
+
+Floyd-Warshall算法：可以计算得到存储任意两点间的最小距离的`dist`，时间复杂度`O(V^3)`。对于每个节点分别作为中间节点的情况，去看能否减少某两个节点间的距离。初始两节点`i, j`间若无边则`dist[i][j] == inf`。
+
+```python
+def floyd_warshall(graph):
+    V = len(graph)
+    dist = [row[:] for row in graph]
+
+    for k in range(V):
+        for i in range(V):
+            for j in range(V):
+                if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+
+    return dist
+```
+
+#### 拓扑排序
 
 对无环有向图进行拓扑排序，对于任意边`(u, v)`，排序结果`result`中`u`都在`v`前面。若无法把所有顶点加入`result`中，则有环。
+
+Kahn算法：
 
 ```python
 from collections import deque, defaultdict
@@ -506,6 +548,37 @@ while len(result) < n - 1:
 print(result)
 ```
 
+还可以基于邻接矩阵实现，时间复杂度没有对数因子，适用于稠密图。
+
+```python
+def prim_matrix(graph, n):
+    inf = float('inf')
+    key = [inf] * n
+    key[0] = 0
+    visited = [False] * n
+    # 记录结构
+    parent = [-1] * n
+
+    for _ in range(V):
+        u = -1
+        min_key = inf
+        for v in range(n):
+            if not visited[v] and key[v] < min_key:
+                min_key = key[v]
+                u = v
+        if u == -1:
+            # 图不连通
+            break
+
+        visited[u] = True
+        for v in range(n):
+            if graph[u][v] < key[v] and not visited[v]:
+                key[v] = graph[u][v]
+                parent[v] = u
+
+    return sum(key)
+```
+
 Kruskal算法：对所有边`edges`按权值进行排序，遍历每一条边，利用并查集，如果一条边的两个节点尚未在同一个连通分量中，则将该边加入`result`中。适用于稀疏图。
 
 ```python
@@ -540,6 +613,8 @@ print(f'{num:.7f}') # 不能随便加空格！
 ```
 
 ### 字符串解析为表达式
+
+可以是数，元组，列表等等任何东西。
 
 ```python
 from math import sqrt
