@@ -595,11 +595,13 @@ for w, u, v in sorted(edges):
 
 ## 语法&小技巧
 
-### ASCII
+### 字符串
 
 ```python
 print(ord('A'), ord('a'), chr(65))
 # 65 97 A
+print('sdfsa'.replace('s', 'e'))
+# edfea
 ```
 
 ### 保留小数位数
