@@ -602,6 +602,8 @@ print(ord('A'), ord('a'), chr(65))
 # 65 97 A
 print('sdfsa'.replace('s', 'e'))
 # edfea
+print('010980511'.isdigit())
+# True
 ```
 
 ### 保留小数位数
