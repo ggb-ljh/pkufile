@@ -604,6 +604,8 @@ print('sdfsa'.replace('s', 'e'))
 # edfea
 print('010980511'.isdigit())
 # True
+print('114514'.lstrip('1'))
+# 4514
 ```
 
 ### 保留小数位数
