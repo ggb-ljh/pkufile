@@ -408,6 +408,26 @@ print(ans)
 
 一个节点的左指针为其第一个子节点，右指针为其下一个兄弟节点。因此，前序遍历序列不变。
 
+#### 根据遍历序列建立二叉树
+
+以根据前中序遍历序列`preorder`和`inorder`建树为例，时间复杂度`O(n)`。
+
+```python
+n = len(preorder)
+preorder_dict = {preorder[i]: i for i in range(n)}
+inorder_dict = {inorder[i]: i for i in range(n)}
+
+def build(pre_left, pre_right, in_left, in_right):
+    if pre_left > pre_right:
+        return None
+    value = preorder[pre_left]
+    index = inorder_dict[value]
+    root = TreeNode(value)
+    root.left = build(pre_left + 1, pre_left + index - in_left, in_left, index - 1)
+    root.right = build(pre_left + index - in_left + 1, pre_right, index + 1, in_right)
+    return root
+```
+
 #### 并查集
 
 注意可能根据题目需求不同，`union()`的实现方式需要调整。
@@ -434,6 +454,48 @@ class DisjointSet:
         else:
             self.parents[y_rep] = x_rep
             self.rank[x_rep] += 1
+```
+
+#### 堆实现
+
+```python
+class BinHeap:
+    def __init__(self):
+        self.heap_list = [-float('inf')]
+        self.size = 0
+
+    def perc_up(self, i):
+        while i >> 1 > 0:
+            if self.heap_list[i] <self.heap_list[i >> 1]:
+                self.heap_list[i], self.heap_list[i >> 1] = self.heap_list[i >> 1], self.heap_list[i]
+            i >>= 1
+
+    def insert(self, value):
+        self.heap_list.append(value)
+        self.size += 1
+        self.perc_up(self.size)
+
+    def min_child(self, i):
+        if i << 1 | 1 > self.size:
+            return i << 1
+        if self.heap_list[i << 1] < self.heap_list[i << 1 | 1]:
+            return i << 1
+        return i << 1 | 1
+
+    def perc_down(self, i):
+        while i << 1 <= self.size:
+            c = self.min_child(i)
+            if self.heap_list[i] > self.heap_list[c]:
+                self.heap_list[i], self.heap_list[c] = self.heap_list[c], self.heap_list[i]
+            i = c
+
+    def pop(self):
+        ans = self.heap_list[1]
+        self.heap_list[1] = self.heap_list[self.size]
+        self.heap_list.pop()
+        self.size -= 1
+        self.perc_down(1)
+        return ans
 ```
 
 ### 图
