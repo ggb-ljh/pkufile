@@ -498,6 +498,77 @@ class BinHeap:
         return ans
 ```
 
+#### 中位数查询
+
+```python
+class MedianQueryQueue:
+    def __init__(self):
+        self.small = []
+        self.large = []
+        self.small_size = 0
+        self.large_size = 0
+        self.small_search = defaultdict(int)
+        self.large_search = defaultdict(int)
+
+    def delete(self):
+        while self.small and self.small_search[-self.small[0]] == 0:
+            heappop(self.small)
+        while self.large and self.large_search[self.large[0]] == 0:
+            heappop(self.large)
+
+    def balance(self):
+        self.delete()
+        if self.small_size > self.large_size + 1:
+            num = -heappop(self.small)
+            heappush(self.large, num)
+            self.small_size -= 1
+            self.large_size += 1
+            self.small_search[num] -= 1
+            self.large_search[num] += 1
+        if self.small_size < self.large_size:
+            num = heappop(self.large)
+            heappush(self.small, -num)
+            self.small_size += 1
+            self.large_size -= 1
+            self.small_search[num] += 1
+            self.large_search[num] -= 1
+        self.delete()
+        if self.small and self.large and -self.small[0] > self.large[0]:
+            num1, num2 = -heappop(self.small), heappop(self.large)
+            heappush(self.large, num1)
+            heappush(self.small, -num2)
+            self.small_search[num1] -= 1
+            self.small_search[num2] += 1
+            self.large_search[num1] += 1
+            self.large_search[num2] -= 1
+        self.delete()
+
+    def add(self, x):
+        heappush(self.small, -x)
+        self.small_size += 1
+        self.small_search[x] += 1
+        self.balance()
+
+    def remove(self, x):
+        if x <= -self.small[0]:
+            self.small_size -= 1
+            self.small_search[x] -= 1
+        else:
+            self.large_size -= 1
+            self.large_search[x] -= 1
+        self.balance()
+
+    def query(self):
+        if self.small_size == self.large_size:
+            tot = self.large[0] - self.small[0]
+            if tot % 2 == 1:
+                return round(tot / 2, 1)
+            else:
+                return tot // 2
+        else:
+            return -self.small[0]
+```
+
 ### 图
 
 #### 最短路径
