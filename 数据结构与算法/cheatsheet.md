@@ -500,7 +500,7 @@ class BinHeap:
 
 ### 图
 
-#### 最短路径Bellman-Ford算法
+#### 最短路径
 
 Dijkstra算法：从堆中`heappop`出来的步长会越来越大。
 
