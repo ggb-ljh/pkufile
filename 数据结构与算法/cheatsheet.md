@@ -726,6 +726,50 @@ for w, u, v in sorted(edges):
         result.append((w, u, v))
 ```
 
+#### 强连通单元——Kosaraju算法
+
+根据邻接表`graph`得到`sccs: List[List[int]]`，`sccs`的每一个元素都是强连通单元。
+
+先进行一次DFS并记录完成时间，将图转置后按完成时间的逆序再进行DFS。
+
+```python
+def dfs1(graph, node, visited, stack):
+    visited[node] = True
+    for neighbor in graph[node]:
+        if not visited[neighbor]:
+            dfs1(graph, neighbor, visited, stack)
+    stack.append(node)
+
+def dfs2(graph, node, visited, component):
+    visited[node] = True
+    component.append(node)
+    for neighbor in graph[node]:
+        if not visited[neighbor]:
+            dfs2(graph, neighbor, visited, component)
+
+def kosaraju(graph):
+    stack = []
+    visited = [False] * len(graph)
+    for node in range(len(graph)):
+        if not visited[node]:
+            dfs1(graph, node, visited, stack)
+    
+    transposed_graph = [[] for _ in range(len(graph))]
+    for node in range(len(graph)):
+        for neighbor in graph[node]:
+            transposed_graph[neighbor].append(node)
+    
+    visited = [False] * len(graph)
+    sccs = []
+    while stack:
+        node = stack.pop()
+        if not visited[node]:
+            scc = []
+            dfs2(transposed_graph, node, visited, scc)
+            sccs.append(scc)
+    return sccs
+```
+
 ## 语法&小技巧
 
 ### 字符串
@@ -808,5 +852,3 @@ s = '26'
 print('yes' if re.match(reg, s) else 'no')
 # yes
 ```
-
-
