@@ -65,7 +65,6 @@ def merge_two(left, right):
             cnt += l1 - p1
     res.extend(left[p1:])
     res.extend(right[p2:])
-
     return res, cnt
 
 def merge_self(nums):
@@ -76,12 +75,10 @@ def merge_self(nums):
     merged_left, cnt_left = merge_self(nums[:mid])
     merged_right, cnt_right = merge_self(nums[mid:])
     merged_two, cnt = merge_two(merged_left, merged_right)
-
     return merged_two, cnt + cnt_right + cnt_left
 
 seq = [2, 6, 3, 4, 5, 1]
 _, ans = merge_self(seq)
-
 print(ans)
 # 8
 ```
@@ -217,15 +214,12 @@ def find_next_greater(nums):
     n = len(nums)
     res = [0] * n
     stack = []
-
     for i in range(n):
         while stack and nums[i] > nums[stack[-1]]:
             res[stack.pop()] = i
         stack.append(i)
-
     while stack:
         res[stack.pop()] = n
-
     return res
 
 print(find_next_greater([4, 5, 2, 25]))
@@ -256,7 +250,6 @@ def reverse_linked_list(head):
 def merge_two_lists(head1, head2):
     dummy = ListNode(0)
     cur = dummy
-
     while head1 is not None and head2 is not None:
         if head1.val <= head2.val:
             cur.next, head1 = head1, head1.next
@@ -264,7 +257,6 @@ def merge_two_lists(head1, head2):
             cur.next, head2 = head2, head2.next
         cur = cur.next
     cur.next = head2 if head1 is None else head1
-    
     return dummy.next
 ```
 
@@ -317,7 +309,6 @@ def isBST(root):
             return False
         cur = root.val
         root = root.right
-
     return True
 ```
 
@@ -340,17 +331,10 @@ def helper(node, lower=float('-inf'), upper=float('inf')):
 思路：弹出堆中最小的两个节点，合并并入堆。循环往复，直至堆中只剩下根节点。
 
 ```python
-from heapq import heappop, heappush, heapify
-
 class TreeNode:
-    def __init__(self, val, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-
+    # def __init__(self, val, left=None, right=None): ...
     def __lt__(self, other):
         return self.val < other.val
-
 
 n = 4
 heap = [TreeNode(i) for i in [1, 1, 3, 5]]
@@ -411,12 +395,10 @@ class DisjointSet:
     def __init__(self, k):
         self.parents = list(range(k))
         self.rank = [1] * k
-
     def find(self, x):
         if self.parents[x] != x:
             self.parents[x] = self.find(self.parents[x])
         return self.parents[x]
-
     def union(self, x, y):
         x_rep, y_rep = self.find(x), self.find(y)
         if x_rep == y_rep:
@@ -437,32 +419,27 @@ class BinHeap:
     def __init__(self):
         self.heap_list = [-float('inf')]
         self.size = 0
-
     def perc_up(self, i):
         while i >> 1 > 0:
             if self.heap_list[i] <self.heap_list[i >> 1]:
                 self.heap_list[i], self.heap_list[i >> 1] = self.heap_list[i >> 1], self.heap_list[i]
             i >>= 1
-
     def insert(self, value):
         self.heap_list.append(value)
         self.size += 1
         self.perc_up(self.size)
-
     def min_child(self, i):
         if i << 1 | 1 > self.size:
             return i << 1
         if self.heap_list[i << 1] < self.heap_list[i << 1 | 1]:
             return i << 1
         return i << 1 | 1
-
     def perc_down(self, i):
         while i << 1 <= self.size:
             c = self.min_child(i)
             if self.heap_list[i] > self.heap_list[c]:
                 self.heap_list[i], self.heap_list[c] = self.heap_list[c], self.heap_list[i]
             i = c
-
     def pop(self):
         ans = self.heap_list[1]
         self.heap_list[1] = self.heap_list[self.size]
@@ -555,17 +532,14 @@ Bellman-Ford算法：经过`v-1`次松弛后，若还能松弛则存在负权回
 def bellman_ford(graph, V, source):
     dist = [float('inf')] * V
     dist[source] = 0
-
     for _ in range(V - 1):
         for u, v, w in graph:
             if dist[u] != float('inf') and dist[u] + w < dist[v]:
                 dist[v] = dist[u] + w
-
     for u, v, w in graph:
         if dist[u] != float('inf') and dist[u] + w < dist[v]:
             # 存在负权回路
             return None
-
     return dist
 ```
 
@@ -575,13 +549,11 @@ Floyd-Warshall算法：可以计算得到存储任意两点间的最小距离的
 def floyd_warshall(graph):
     V = len(graph)
     dist = [row[:] for row in graph]
-
     for k in range(V):
         for i in range(V):
             for j in range(V):
                 if dist[i][k] + dist[k][j] < dist[i][j]:
                     dist[i][j] = dist[i][k] + dist[k][j]
-
     return dist
 ```
 
@@ -597,11 +569,9 @@ from collections import deque, defaultdict
 def topological_sort(graph):
     degree = defaultdict(int)
     result = []
-
     for u in graph:
         for v in graph[u]:
             degree[v] += 1
-
     q = deque(u for u in graph if degree[u] == 0)
     while q:
         u = q.popleft()
@@ -610,22 +580,7 @@ def topological_sort(graph):
             degree[v] -= 1
             if degree[v] == 0:
                 q.append(v)
-
     return result if len(result) == len(graph) else None
-
-def main():
-    graph = {
-        'A': ['B', 'C'],
-        'B': ['C', 'D'],
-        'C': ['E'],
-        'D': ['F'],
-        'E': ['F'],
-        'F': []
-    }
-    print(topological_sort(graph))
-
-main()
-# ['A', 'B', 'C', 'D', 'E', 'F']
 ```
 
 #### 最小生成树——Prim算法&Kruskal算法
@@ -635,8 +590,6 @@ main()
 Prim算法：对由`0`~`n - 1`标记节点的图`graph`，选定某一起始节点，不断选择已生成的树通往外部的边中权值最小的一条，将其加入`result`中。适用于稠密图。
 
 ```python
-from heapq import heapify, heappush, heappop
-
 # 起始节点选为0
 heap = [(graph[0][child], 0, child) for child in graph[0]]
 heapify(heap)
@@ -652,7 +605,6 @@ while len(result) < n - 1:
         for to in range(n):
             if not visited[to]:
                 heappush(heap, (matrix[child][to], child, to))
-print(result)
 ```
 
 还可以基于邻接矩阵实现，时间复杂度没有对数因子，适用于稠密图。
@@ -663,7 +615,6 @@ def prim_matrix(graph, n):
     key = [inf] * n
     key[0] = 0
     visited = [False] * n
-    # 记录结构
     parent = [-1] * n
 
     for _ in range(V):
@@ -673,8 +624,7 @@ def prim_matrix(graph, n):
             if not visited[v] and key[v] < min_key:
                 min_key = key[v]
                 u = v
-        if u == -1:
-            # 图不连通
+        if u == -1: # 图不连通
             break
 
         visited[u] = True
@@ -689,8 +639,7 @@ def prim_matrix(graph, n):
 Kruskal算法：对所有边`edges`按权值进行排序，遍历每一条边，利用并查集，如果一条边的两个节点尚未在同一个连通分量中，则将该边加入`result`中。适用于稀疏图。
 
 ```python
-# class DisjointSet:
-#     ...
+# class DisjointSet: ...
 
 djs = DisjointSet(n)
 result = []
