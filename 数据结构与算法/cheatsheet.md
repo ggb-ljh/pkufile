@@ -77,13 +77,13 @@ print(ans)
 # 8
 ```
 
-### 素数筛法
-
-#### 埃氏筛
+### 素数筛法——埃氏筛&欧拉筛
 
 ```python
 prime = [True] * (n + 1)
 primes = []
+
+# 埃氏筛
 p = 2
 while p * p <= n:
     if prime[p]:
@@ -91,13 +91,8 @@ while p * p <= n:
         for i in range(p * p, n + 1, p):
             prime[i] = False
     p += 1
-```
 
-#### 欧拉筛
-
-```python
-primes = []
-prime = [True] * (n + 1)
+# 欧拉筛
 for i in range(2, n + 1):
     if prime[i]:
         primes.append(i)
@@ -256,8 +251,6 @@ def reverse_linked_list(head):
 ```
 
 #### 合并两个升序链表
-
-合并两个升序链表并返回新的头节点。
 
 ```python
 def merge_two_lists(head1, head2):
@@ -473,13 +466,11 @@ class MedianQueryQueue:
         self.large_size = 0
         self.small_search = defaultdict(int)
         self.large_search = defaultdict(int)
-
     def delete(self):
         while self.small and self.small_search[-self.small[0]] == 0:
             heappop(self.small)
         while self.large and self.large_search[self.large[0]] == 0:
             heappop(self.large)
-
     def balance(self):
         self.delete()
         if self.small_size > self.large_size + 1:
@@ -506,13 +497,11 @@ class MedianQueryQueue:
             self.large_search[num1] += 1
             self.large_search[num2] -= 1
         self.delete()
-
     def add(self, x):
         heappush(self.small, -x)
         self.small_size += 1
         self.small_search[x] += 1
         self.balance()
-
     def remove(self, x):
         if x <= -self.small[0]:
             self.small_size -= 1
@@ -521,7 +510,6 @@ class MedianQueryQueue:
             self.large_size -= 1
             self.large_search[x] -= 1
         self.balance()
-
     def query(self):
         if self.small_size == self.large_size:
             tot = self.large[0] - self.small[0]
@@ -569,11 +557,7 @@ def floyd_warshall(graph):
     return dist
 ```
 
-#### 拓扑排序
-
-对无环有向图进行拓扑排序，对于任意边`(u, v)`，排序结果`result`中`u`都在`v`前面。若无法把所有顶点加入`result`中，则有环。
-
-Kahn算法：
+#### 拓扑排序——Kahn算法
 
 ```python
 def topological_sort(graph):
