@@ -1,4 +1,4 @@
-# CHEETSHEAT
+# CHEATSHEET
 
 ## 算法
 
@@ -784,18 +784,6 @@ for j in permutations(c, 2):
 # ('f', 'g')
 # ('g', 'e')
 # ('g', 'f')
-```
-
-### 保留小数位数
-
-```python
-
-```
-
-### 全排列
-
-```python
-
 ```
 
 ### 正则表达式
