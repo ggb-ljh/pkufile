@@ -236,13 +236,6 @@ print(find_next_greater([4, 5, 2, 25]))
 
 ### 链表
 
-```python
-class ListNode:
-    def __init__(self, val):
-        self.val = val
-        self.next = None
-```
-
 #### 反转链表
 
 反转链表并返回新的头节点。
@@ -289,25 +282,6 @@ def find_middle_node(head):
 ```
 
 ### 树
-
-二叉树的定义
-
-```python
-class TreeNode:
-    def __init__(self, val, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-```
-
-多叉树的定义
-
-```python
-class TreeNode:
-    def __init__(self, val):
-        self.val = val
-        self.children = []
-```
 
 #### 二叉搜索树的建立
 
@@ -772,7 +746,7 @@ def kosaraju(graph):
 
 ## 语法&小技巧
 
-### 字符串
+### 字符串&数字&全排列
 
 ```python
 print(ord('A'), ord('a'), chr(65))
@@ -783,21 +757,17 @@ print('010980511'.isdigit())
 # True
 print('114514'.lstrip('1'))
 # 4514
-```
 
-### 保留小数位数
-
-```python
+print(math.log(1000, 10))
+# 2.9999999999999996
+print(math.isclose(0.1 + 0.2, 0.3))
+# True
 print('%.5f' % 2 ** 0.5)
 # 1.41421
 num = 1.145141919810
 print(f'{num:.7f}') # 不能随便加空格！
 # 1.1451419
-```
 
-### 全排列
-
-```python
 from itertools import permutations
 a = 'abc'
 for i in permutations(a):
@@ -814,6 +784,18 @@ for j in permutations(c, 2):
 # ('f', 'g')
 # ('g', 'e')
 # ('g', 'f')
+```
+
+### 保留小数位数
+
+```python
+
+```
+
+### 全排列
+
+```python
+
 ```
 
 ### 正则表达式
