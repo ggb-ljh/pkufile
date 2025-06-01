@@ -4,9 +4,7 @@
 
 ### 二分查找
 
-`small`, `large`为可能取到的边界值。
-
-`valid(x)`大于等于某一值时为`True`，反之为`False`的情况：
+`small`, `large`为可能取到的边界值。`valid(x)`大于等于/小于等于某一值时为`True`，反之为`False`的情况：
 
 ```python
 def binary_search_greatest_lower_bound(small, large):
@@ -18,11 +16,7 @@ def binary_search_greatest_lower_bound(small, large):
         else:
             left = mid + 1
     return left
-```
 
-`valid(x)`小于等于某一值时为`True`，反之为`False`的情况：
-
-```python
 def binary_search_least_upper_bound(small, large):
     left, right = small, large + 1
     while left < right:
@@ -556,8 +550,7 @@ def bellman_ford(graph, V, source):
             if dist[u] != float('inf') and dist[u] + w < dist[v]:
                 dist[v] = dist[u] + w
     for u, v, w in graph:
-        if dist[u] != float('inf') and dist[u] + w < dist[v]:
-            # 存在负权回路
+        if dist[u] != float('inf') and dist[u] + w < dist[v]: # 存在负权回路
             return None
     return dist
 ```
@@ -583,8 +576,6 @@ def floyd_warshall(graph):
 Kahn算法：
 
 ```python
-from collections import deque, defaultdict
-
 def topological_sort(graph):
     degree = defaultdict(int)
     result = []
@@ -609,8 +600,7 @@ def topological_sort(graph):
 Prim算法：对由`0`~`n - 1`标记节点的图`graph`，选定某一起始节点，不断选择已生成的树通往外部的边中权值最小的一条，将其加入`result`中。适用于稠密图。
 
 ```python
-# 起始节点选为0
-heap = [(graph[0][child], 0, child) for child in graph[0]]
+heap = [(graph[0][child], 0, child) for child in graph[0]] # 起始节点选为0
 heapify(heap)
 visited = [False] * n
 visited[0] = True
@@ -658,8 +648,6 @@ def prim_matrix(graph, n):
 Kruskal算法：对所有边`edges`按权值进行排序，遍历每一条边，利用并查集，如果一条边的两个节点尚未在同一个连通分量中，则将该边加入`result`中。适用于稀疏图。
 
 ```python
-# class DisjointSet: ...
-
 djs = DisjointSet(n)
 result = []
 for w, u, v in sorted(edges):
@@ -784,7 +772,6 @@ for j in permutations(c, 2):
 
 ```python
 import re
-
 reg = r'^(0|[1-9][0-9]*)$'
 s = '26'
 print('yes' if re.match(reg, s) else 'no')
