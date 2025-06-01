@@ -115,6 +115,25 @@ for i in range(2, n + 1):
             break
 ```
 
+### Dilworth定理
+
+最少严格/不严格上升子序列的分割数=最长不严格/严格下降子序列长度。
+
+```python
+import bisect
+arr = [9, 4, 10, 5, 1]
+arr.reverse()
+a = []
+for x in arr:
+    idx = bisect.bisect(a, x)
+    if idx == len(a):
+        a.append(x)
+    else:
+        a[idx] = x
+print(len(a))
+# 3
+```
+
 ### KMP算法
 
 用于寻找字符串`text`中出现字符串模式`pattern`的位置。
